@@ -1,0 +1,453 @@
+{
+  "king model layer": {
+    "prefix": "kmo",
+    "body": [
+      "",
+      "namespace app\\model;",
+      "",
+      "use king\\Db;",
+      "",
+      "class $TM_FILENAME_BASE extends Db",
+      "{",
+      "\tprotected static \\$table = '$1${TM_FILENAME_BASE/([A-Z]+)/${1:/downcase}/g}';",
+      "}\n"
+    ]
+  },
+  "king cache layer": {
+    "prefix": "kca",
+    "body": [
+      "",
+      "namespace app\\cache;",
+      "",
+      "use king\\lib\\Cache;",
+      "",
+      "class $TM_FILENAME_BASE extends Cache",
+      "{",
+      "\tpublic static function set($1)",
+      "\t{",
+      "\t}",
+      "",
+      "\tpublic static function get()",
+      "\t{",
+      "\t}",
+      "",
+      "\tpublic static function delete()",
+      "\t{",
+      "\t}",
+      "}\n"
+    ]
+  },
+  "king controller layer": {
+    "prefix": "kco",
+    "body": [
+      "",
+      "namespace app\\controller\\www;",
+      "",
+      "use king\\lib\\Response;",
+      "use app\\validate\\Page as PageValidate;",
+      "use app\\validate\\\\$TM_FILENAME_BASE as $TM_FILENAME_BASE$Validate;",
+      "use app\\service\\\\$TM_FILENAME_BASE as $TM_FILENAME_BASE$Service;",
+      "",
+      "class $TM_FILENAME_BASE",
+      "{",
+      "\tpublic function get($1)",
+      "\t{",
+      "\t\t$$data = G();",
+      "\t\tPageValidate::check($$data);",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$data, 'get');",
+      "\t\t$$rs = $TM_FILENAME_BASE$Service::getList($$data);",
+      "\t\tResponse::sendResponseJson(200, $$rs);",
+      "\t}",
+      "",
+      "\tpublic function add()",
+      "\t{",
+      "\t\t$$data = P();",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$data, 'save');",
+      "\t\t$$rs = $TM_FILENAME_BASE$Service::save($$data);",
+      "\t\tResponse::sendResponseJson(200, $$rs);",
+      "\t}",
+      "",
+      "\tpublic function edit($$id)",
+      "\t{",
+      "\t\t$$data = steam($$id);",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$data, 'update');",
+      "\t\t$$rs = $TM_FILENAME_BASE$Service::update($$id, $$data);",
+      "\t\tResponse::sendResponseJson(200, $$rs);",
+      "\t}",
+      "",
+      "\tpublic function delete($$id)",
+      "\t{",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$id, 'delete');",
+      "\t\t$TM_FILENAME_BASE$Service::delete($$id);",
+      "\t\tResponse::sendResponseJson(200);",
+      "\t}",
+      "",
+      "\tpublic function detail($$id)",
+      "\t{",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$id, 'detail');",
+      "\t\t$$rs = $TM_FILENAME_BASE$Service::getInfo($$id);",
+      "\t\tResponse::sendResponseJson(200, $$rs);",
+      "\t}",
+      "}\n"
+    ]
+  },
+  "king swoole controller layer": {
+    "prefix": "kcos",
+    "body": [
+      "",
+      "namespace app\\controller\\www;",
+      "",
+      "use king\\Controller;",
+      "use king\\lib\\Response;",
+      "use app\\validate\\Page as PageValidate;",
+      "use app\\validate\\\\$TM_FILENAME_BASE as $TM_FILENAME_BASE$Validate;",
+      "use app\\service\\\\$TM_FILENAME_BASE as $TM_FILENAME_BASE$Service;",
+      "",
+      "class $TM_FILENAME_BASE",
+      "{",
+      "\tpublic function get($1)",
+      "\t{",
+      "\t\t$$data = $$this->request->g();",
+      "\t\tPageValidate::check($$data);",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$data, 'get');",
+      "\t\t$$rs = $TM_FILENAME_BASE$Service::getList($$data);",
+      "\t\tResponse::sendResponseJson(200, $$rs);",
+      "\t}",
+      "",
+      "\tpublic function add()",
+      "\t{",
+      "\t\t$$data = $$this->request->p();",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$data, 'save');",
+      "\t\t$$rs = $TM_FILENAME_BASE$Service::save($$data);",
+      "\t\tResponse::sendResponseJson(200, $$rs);",
+      "\t}",
+      "",
+      "\tpublic function edit($$id)",
+      "\t{",
+      "\t\t$$data = $$this->request->steam($$id);",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$data, 'update');",
+      "\t\t$$rs = $TM_FILENAME_BASE$Service::update($$id, $$data);",
+      "\t\tResponse::sendResponseJson(200, $$rs);",
+      "\t}",
+      "",
+      "\tpublic function delete($$id)",
+      "\t{",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$id, 'delete');",
+      "\t\t$TM_FILENAME_BASE$Service::delete($$id);",
+      "\t\tResponse::sendResponseJson(200);",
+      "\t}",
+      "",
+      "\tpublic function detail($$id)",
+      "\t{",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$id, 'detail');",
+      "\t\t$$rs = $TM_FILENAME_BASE$Service::getInfo($$id);",
+      "\t\tResponse::sendResponseJson(200, $$rs);",
+      "\t}",
+      "}\n"
+    ]
+  },  
+,
+  "king swoole controller template layer": {
+    "prefix": "kcots",
+    "body": [
+      "",
+      "namespace app\\controller\\www;",
+      "",
+      "use king\\lib\\Response;",
+      "use app\\controller\\www\\Template",
+      "use app\\validate\\Page as PageValidate;",
+      "use app\\validate\\\\$TM_FILENAME_BASE as $TM_FILENAME_BASE$Validate;",
+      "use app\\service\\\\$TM_FILENAME_BASE as $TM_FILENAME_BASE$Service;",
+      "",
+      "class $TM_FILENAME_BASE extends Template",
+      "{",
+      "\tpublic function get($1)",
+      "\t{",
+      "\t\t$$data = $$this->request->g();",
+      "\t\tPageValidate::check($$data);",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$data, 'get');",
+      "\t\t$$rs = $TM_FILENAME_BASE$Service::getList($$data);",
+      "\t\tResponse::sendResponseJson(200, $$rs);",
+      "\t}",
+      "",
+      "\tpublic function add()",
+      "\t{",
+      "\t\t$$data = $$this->request->p();",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$data, 'save');",
+      "\t\t$$rs = $TM_FILENAME_BASE$Service::save($$data);",
+      "\t\tResponse::sendResponseJson(200, $$rs);",
+      "\t}",
+      "",
+      "\tpublic function edit($$id)",
+      "\t{",
+      "\t\t$$data = $$this->request->steam($$id);",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$data, 'update');",
+      "\t\t$$rs = $TM_FILENAME_BASE$Service::update($$id, $$data);",
+      "\t\tResponse::sendResponseJson(200, $$rs);",
+      "\t}",
+      "",
+      "\tpublic function delete($$id)",
+      "\t{",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$id, 'delete');",
+      "\t\t$TM_FILENAME_BASE$Service::delete($$id);",
+      "\t\tResponse::sendResponseJson(200);",
+      "\t}",
+      "",
+      "\tpublic function detail($$id)",
+      "\t{",
+      "\t\t$TM_FILENAME_BASE$Validate::check($$id, 'detail');",
+      "\t\t$$rs = $TM_FILENAME_BASE$Service::getInfo($$id);",
+      "\t\tResponse::sendResponseJson(200, $$rs);",
+      "\t}",
+      "}\n"
+    ]
+  },    
+  "king service layer": {
+    "prefix": "kse",
+    "body": [
+      "",
+      "namespace app\\service;",
+      "",
+      "use king\\lib\\exception\\BadRequestHttpException;",
+      "use app\\model\\\\$TM_FILENAME_BASE as $TM_FILENAME_BASE$Model;",
+      "use app\\cache\\\\$TM_FILENAME_BASE as $TM_FILENAME_BASE$Cache;",
+      "",
+      "class $TM_FILENAME_BASE",
+      "{",
+      "\tpublic static function getList($1$$data)",
+      "\t{",
+      "\t\t$$query = $TM_FILENAME_BASE$Model::field();",
+      "\t\tif (!empty($$data['status'])) {",
+      "\t\t\t$$query->where('status', $$data['status']);",
+      "\t\t}",
+      "\t\t",
+      "\t\treturn $$query->page($$data['per_page'], $$data['page']);",
+      "\t}",
+      "",
+      "\tpublic static function save($$data)",
+      "\t{",
+      "\t\treturn $TM_FILENAME_BASE$Model::save($$data);",
+      "\t}",
+      "",
+      "\tpublic static function update($$id, $$data)",
+      "\t{",
+      "\t\t$$count = $TM_FILENAME_BASE$Model::where('id', $$id)->count();",
+      "\t\tif ($$count > 0) {",
+      "\t\t\treturn $TM_FILENAME_BASE$Model::save($$data);",
+      "\t\t} else {",
+      "\t\t\tthrow new BadRequestHttpException('更新内容不存在');",
+      "\t\t}",
+      "\t}",
+      "",
+      "\tpublic static function delete($$id)",
+      "\t{",
+      "\t\t$$count = $TM_FILENAME_BASE$Model::where('id', $$id)->count();",
+      "\t\tif ($$count > 0) {",
+      "\t\t\treturn $TM_FILENAME_BASE$Model::where('id', $$id)->delete();",
+      "\t\t} else {",
+      "\t\t\tthrow new BadRequestHttpException('删除对象不存在');",
+      "\t\t}",
+      "\t}",
+      "",
+      "\tpublic static function getInfo($$id)",
+      "\t{",
+      "\t\treturn $TM_FILENAME_BASE$Model::where('id', $$id)->find();",
+      "\t}",
+      "}\n"
+    ]
+  },
+  "king validate layer": {
+    "prefix": "kva",
+    "body": [
+      "",
+      "namespace app\\validate;",
+      "",
+      "use king\\lib\\Valid;",
+      "",
+      "class $TM_FILENAME_BASE",
+      "{",
+      "\tpublic static function check($$data, $$current = '')",
+      "\t{",
+      "\t\t$$data = is_array($$data) ? $$data : ['id' => $$data];",
+      "\t\t$$valid = Valid::getClass($$data, $$current);",
+      "\t\t$$scene = [",
+      "\t\t\t'get' => [],",
+      "\t\t\t'update' => ['id'],",
+      "\t\t\t'delete' => ['id'],",
+      "\t\t\t'detail' => ['id']",
+      "\t\t];",
+      "\t\t$$valid->setScene($$scene);",
+      "\t\t$$valid->hideSceneField('save', ['id']);",
+      "\t\t$$valid->addRule('id', 'required|int|gt,0', 'id');",
+      "\t\t$$valid->response();",
+      "\t}",
+      "}\n"
+    ]
+  },
+  "king helper layer": {
+    "prefix": "khe",
+    "body": [
+      "",
+      "namespace app\\helper;",
+      "",
+      "use king\\lib\\exception\\BadRequestHttpException;",
+      "",
+      "class $TM_FILENAME_BASE",
+      "{",
+      "\tpublic static function index()",
+      "\t{",
+      "\t}",
+      "}\n"
+    ]
+  },
+  "king validate Common": {
+    "prefix": "kvac",
+    "body": [
+      "",
+      "namespace app\\validate;",
+      "",
+      "use king\\lib\\Valid;",
+      "use king\\lib\\Captcha;",
+      "",
+      "class Common",
+      "{",
+      "\tpublic static function checkId($$id)",
+      "{\t",
+      "\t\t$$data['id'] = $$id;",
+      "\t\t$$valid = Valid::getClass($$data);",
+      "\t\t$$valid->addRule('id', 'required|int|gt,0', 'id');",
+      "\t\t$$valid->response();",
+      "\t}",
+      "",
+      "\tpublic function checkCaptcha($$value, $$valid)",
+      "\t{",
+      "\t\t$$capt = Captcha::getClass();",
+      "\t\tif ($$capt->valid($$value, H('code')) != true) {",
+      "\t\t\t$$valid->setError('验证码错误');",
+      "\t\t}",
+      "\t}",
+      "}\n"
+    ]
+  },
+  "king validate Page": {
+    "prefix": "kvap",
+    "body": [
+      "",
+      "namespace app\\validate;",
+      "",
+      "use king\\lib\\Valid;",
+      "use king\\lib\\Captcha;",
+      "",
+      "class Page",
+      "{",
+      "\tpublic static function check(&$$data, $per_page = 20)",
+      "\t{",
+      "\t\t$$valid = Valid::getClass($$data);",
+      "\t\t$$data['page'] = $$data['page'] ?? 1;",
+      "\t\t$$data['per_page'] = $$data['per_page'] ?? $$per_page;",
+      "\t\t$$valid->addRule('page', 'gt,0|lt,1000', '页数');",
+      "\t\t$$valid->addRule('per_page', 'gt,0|lt,50', '条数');",
+      "\t\t$$valid->response();",
+      "\t}",
+      "}\n"
+    ]
+  },
+  "king restful route": {
+    "prefix": "krest",
+    "body": [
+      "'get::$0$1$s$' => '$0$1/get',",
+      "'post::$0$1$s$' => '$0$1/add',",
+      "'put::$0$1$s/(\\d+)$' => '$0$1/edit',",
+      "'delete::$0$1$s/(\\d+)$' => '$0$1/delete',",
+      "'get::$0$1$s/(\\d+)$' => '$0$1/detail',"
+    ]
+  },
+  "king rule": {
+    "prefix": "krule",
+    "body": ["$$valid->addRule('$0$1', 'required$2', '$0$1');"]
+  },
+  "king Response Success": {
+    "prefix": "ksend",
+    "body": ["Response::sendResponseJson(200);$1"]
+  },
+  "king sendReponseJson 200": {
+    "prefix": "ksend2",
+    "body": ["Response::sendResponseJson(200, $1);"]
+  },
+  "king sendReponseJson 400": {
+    "prefix": "ksend4",
+    "body": ["Response::sendResponseJson(400, $$msg);$1"]
+  },
+  "king throw BadRequest": {
+    "prefix": "ktb",
+    "body": ["throw new BadRequestHttpException('$0');$1"]
+  },
+  "king use cache Layer": {
+    "prefix": "kuc",
+    "body": ["use app\\cache\\\\$0$1 as $0$1Cache;$2"]
+  },
+  "king use model": {
+    "prefix": "kum",
+    "body": ["use app\\model\\\\$0$1 as $0$1Model;$2"]
+  },
+  "king use service": {
+    "prefix": "kus",
+    "body": ["use app\\service\\\\$0$1 as $0$1Service;$2"]
+  },
+  "king use validate": {
+    "prefix": "kuv",
+    "body": ["use app\\validate\\\\$0$1 as $0$1Validate;$2"]
+  },
+  "king use helper": {
+    "prefix": "kuh",
+    "body": ["use app\\helper\\\\$0$1 as $0$1Helper;$2"]
+  },
+  "king use template": {
+    "prefix": "kut",
+    "body": ["use app\\controller\\common\\Template;"]
+  },
+  "king use lib cache": {
+    "prefix": "klc",
+    "body": ["use king\\lib\\Cache;"]
+  },
+  "king use lib es": {
+    "prefix": "klc",
+    "body": ["use king\\lib\\Es;"]
+  },
+  "king lib exception 400": {
+    "prefix": "kle400",
+    "body": ["use king\\lib\\exception\\BadRequestHttpException;$1"]
+  },
+  "king lib exception 401": {
+    "prefix": "kle401",
+    "body": ["use king\\lib\\exception\\UnauthorizedHttpException;$1"]
+  },
+  "king lib image": {
+    "prefix": "kli",
+    "body": ["use king\\lib\\Image;$1"]
+  },
+  "king lib Response": {
+    "prefix": "klr",
+    "body": ["use king\\lib\\Response;$1"]
+  },
+  "king lib Signature": {
+    "prefix": "kls",
+    "body": ["use king\\lib\\Signature;$1"]
+  },
+  "king lib Valid": {
+    "prefix": "klv",
+    "body": ["use king\\lib\\Valid;$1"]
+  },
+  "king lib Weixin": {
+    "prefix": "klw",
+    "body": ["use king\\lib\\Weixin;$1"]
+  },
+  "king throw 400": {
+    "prefix": "kt400",
+    "body": ["throw new BadRequestHttpException('$1');$2"]
+  },
+  "king throw 401": {
+    "prefix": "kt401",
+    "body": ["throw new UnauthorizedHttpException('$1');$2"]
+  }
+}
